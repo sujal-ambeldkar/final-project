@@ -1147,7 +1147,7 @@
         uploadMsg.style.display = "block";
 
         try {
-          const res = await fetch("http://localhost:3000/upload-song", {
+          const res = await fetch("https://final-project-backend-2-b3de.onrender.com/upload-song", ... {
             method: "POST",
             body: formData,
           });
@@ -1334,7 +1334,7 @@
       async function loadSavedSongs() {
         const container = document.getElementById("savedSongsList");
         try {
-          const res = await fetch(`http://localhost:3000/api/saved-songs/${username}`);
+          const res = await fetch(`https://final-project-backend-2-b3de.onrender.com/api/saved-songs/${username}`, ) 
           const data = await res.json();
           
           if (!data.success || !data.songs || data.songs.length === 0) {
@@ -1363,7 +1363,7 @@
               e.stopPropagation();
               if (!confirm(`Delete "${song.title}"?`)) return;
               try {
-                const delRes = await fetch(`http://localhost:3000/api/delete-song/${username}/${encodeURIComponent(song.title)}`, {
+                const delRes = awaitfetch(`https://final-project-backend-2-b3de.onrender.com/api/delete-song/${username}/${encodeURIComponent(song.title)}`,  {
                   method: "DELETE",
                 });
                 const delData = await delRes.json();
@@ -1391,7 +1391,7 @@
       async function loadTrendingSongs() {
         const container = document.getElementById("trending");
         try {
-          const res = await fetch("http://localhost:3000/api/trending");
+          const res = await fetch("https://final-project-backend-2-b3de.onrender.com/api/trending", );
           const data = await res.json();
           
           if (!Array.isArray(data) || data.length === 0) {
@@ -1423,7 +1423,7 @@
       async function loadCommunityUploads() {
         const container = document.getElementById("community-uploads");
         try {
-          const res = await fetch("http://localhost:3000/get-all-uploads");
+          const res = await fetch("https://final-project-backend-2-b3de.onrender.com/get-all-uploads", );
           const uploads = await res.json();
 
           if (uploads.length === 0) {
@@ -1452,7 +1452,7 @@
             card.querySelector(".play-btn").addEventListener("click", () => playSong(upload));
             card.querySelector(".save-btn").addEventListener("click", async () => {
               try {
-                const res = await fetch("http://localhost:3000/api/save-song", {
+                const res = await fetch("https://final-project-backend-2-b3de.onrender.com/api/save-song",  {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({

@@ -226,7 +226,8 @@
       const data = Object.fromEntries(formData); // { username: "...", password: "..." }
 
       try {
-        const res = await fetch("/signup", {
+     const res = await fetch("https://final-project-backend-2-b3de.onrender.com/signup", {
+
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),

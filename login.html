@@ -52,13 +52,13 @@
       margin-bottom: 30px;
       animation: fadeSpin 1s ease;
       margin-bottom: 20px;
-        width: 90px;
-        height: 90px;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 12px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
+      width: 90px;
+      height: 90px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
     }
 
     @keyframes fadeSpin {
@@ -66,6 +66,7 @@
         opacity: 0;
         transform: rotate(-30deg) scale(0.8);
       }
+
       to {
         opacity: 1;
         transform: rotate(0deg) scale(1);
@@ -173,37 +174,38 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("loaded");
+      document.body.classList.add("loaded");
 
-  const loginForm = document.getElementById("loginForm");
+      const loginForm = document.getElementById("loginForm");
 
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); // prevent page reload
-    const username = document.getElementById("loginUsername").value;
-    const password = document.getElementById("loginPassword").value;
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault(); // prevent page reload
+        const username = document.getElementById("loginUsername").value;
+        const password = document.getElementById("loginPassword").value;
 
-    try {
-      const res = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        try {
+          const res = await fetch("https://final-project-backend-2-b3de.onrender.com/login", {
+
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            // Store as object with key 'user', which your music script expects
+            localStorage.setItem("user", JSON.stringify({ username: data.username }));
+            window.location.href = "/"; // redirect to homepage
+          } else {
+            alert(data.message);
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Login failed. Try again!");
+        }
       });
-
-      const data = await res.json();
-
-      if (data.success) {
-        // Store as object with key 'user', which your music script expects
-        localStorage.setItem("user", JSON.stringify({ username: data.username }));
-        window.location.href = "/"; // redirect to homepage
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Login failed. Try again!");
-    }
-  });
-});
+    });
 
   </script>
 </body>
